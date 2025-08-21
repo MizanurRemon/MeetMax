@@ -3,4 +3,9 @@
     <string name="app_name">Meet Max</string>
     <string name="meetmax">Meetmax</string>
     <string name="meetmax_call">Meetmax Call</string>
+    <string name="sign_in">Sign In</string>
+    <string name="welcome_back_you_have_been_missed">Welcome back, you’ve been missed!</string>
+    <string name="log_in_with_google">Log in with Google</string>
+    <string name="log_in_with_apple">Log in with Apple</string>
+    <string name="your_email">Your Email</string>
 </resources>

@@ -1,5 +1,7 @@
 package com.meetmax.designsystem.components
 
+import android.annotation.SuppressLint
+import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,7 +19,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -31,62 +32,42 @@ import com.meetmax.designsystem.R as DesignSystemR
 import com.meetmax.common.R as CommonR
 
 @Composable
-fun LogoWithTextVertical(
-    iconSize: Int,
+fun LogoWithTextVerticalPlain(
+    @DrawableRes icon: Int = DesignSystemR.drawable.ic_logo,
+    bgColor: Color = Color.Transparent,
+    iconSize: Int = 26,
     @StringRes title: Int,
-    textStyle: TextStyle
+    textStyle: TextStyle = heading3TextStyle,
+    @SuppressLint("ModifierParameter") modifier: Modifier = Modifier
 ) {
-    Card(
-        shape = RoundedCornerShape(10.r()),
-        colors = CardDefaults.cardColors(
-            containerColor = Color.White
-        ),
-        modifier = Modifier.shadow(
-            elevation = 10.r(),
-            spotColor = Color.White,
-            shape = RoundedCornerShape(10.r())
-        )
+    Row(
+        modifier = modifier
+            .background(bgColor)
+            .padding(vertical = 16.r())
     ) {
-        Row(modifier = Modifier.padding(horizontal = 17.r(), vertical = 16.r())) {
-            Image(
-                painter = painterResource(DesignSystemR.drawable.ic_logo),
-                modifier = Modifier.size(iconSize.r()),
-                contentDescription = null
-            )
+        Image(
+            painter = painterResource(DesignSystemR.drawable.ic_logo),
+            modifier = Modifier.size(iconSize.r()),
+            contentDescription = null
+        )
 
-            Spacer(modifier = Modifier.width(10.r()))
+        Spacer(modifier = Modifier.width(6.r()))
 
-            Text(
-                text = stringResource(title),
-                style = textStyle
-            )
-        }
+        Text(
+            text = stringResource(title),
+            style = textStyle
+        )
     }
 }
+
 
 @Composable
 @Preview
 fun PreviewLogoWithTextVertical() {
-    Box(
-        modifier = Modifier
-            .background(color = BACKGROUND_COLOR)
-    ) {
-        Column(
-            modifier = Modifier.padding(10.r())
-        ) {
-            LogoWithTextVertical(
-                iconSize = 26,
-                title = CommonR.string.meetmax,
-                textStyle = heading3TextStyle
-            )
-
-            Spacer(modifier = Modifier.height(10.r()))
-
-            LogoWithTextVertical(
-                iconSize = 20,
-                title = CommonR.string.meetmax_call,
-                textStyle = displayMediumTextStyle
-            )
-        }
-    }
+    LogoWithTextVerticalPlain(
+        iconSize = 26,
+        title = CommonR.string.meetmax,
+        textStyle = heading3TextStyle,
+        bgColor = Color.White
+    )
 }
