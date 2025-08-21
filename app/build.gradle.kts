@@ -2,18 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.remon.meetmax"
-    compileSdk = 36
+    namespace = ProjectConfig.APP_ID
+    compileSdk = libs.versions.compile.sdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.remon.meetmax"
-        minSdk = 26
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = ProjectConfig.APP_ID
+        minSdk = libs.versions.min.sdk.get().toInt()
+        targetSdk = libs.versions.target.sdk.get().toInt()
+        versionCode = ProjectConfig.VERSION_CODE
+        versionName = ProjectConfig.VERSION_NAME
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,19 +30,23 @@ android {
         }
     }
     compileOptions {
+        isCoreLibraryDesugaringEnabled = true
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = ProjectConfig.JVM_TARGET
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
 dependencies {
-
+    implementation(libs.navigation.compose)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -49,6 +55,30 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.hilt.navigation.compose)
+
+
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+
+
+
+    implementation(project(Modules.DESIGN_SYSTEM))
+    implementation(project(Modules.COMMON))
+    /*
+    implementation(project(Modules.NETWORK))
+    implementation(project(Modules.DATABASE))
+    implementation(project(Modules.DATASTORE))
+
+    implementation(project(Modules.DOMAIN))
+    implementation(project(Modules.DATA))
+    implementation(project(Modules.UI))*/
+
+   /* implementation(project(Modules.AUTH_PRESENTATION))
+    implementation(project(Modules.AUTH_DOMAIN))
+    implementation(project(Modules.AUTH_DATA))*/
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
