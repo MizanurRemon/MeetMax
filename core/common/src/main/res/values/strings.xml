@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Meet Max</string>
+    <string name="meetmax">Meetmax</string>
+    <string name="meetmax_call">Meetmax Call</string>
 </resources>
