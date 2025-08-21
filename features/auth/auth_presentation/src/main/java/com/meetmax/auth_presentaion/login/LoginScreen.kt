@@ -10,6 +10,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import com.meetmax.designsystem.r
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
 import com.meetmax.ui.DevicePreviews
@@ -30,7 +31,7 @@ fun LoginScreen() {
 
 
 @Composable
-@DevicePreviews
+@Preview
 fun PreviewLoginScreen() {
     LoginScreen()
 }
