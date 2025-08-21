@@ -1,6 +1,5 @@
 package com.meetmax.meetmax.navigations
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -13,6 +12,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.meetmax.auth_presentaion.login.LoginScreen
 import com.meetmax.common.navigation.Route
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
@@ -35,10 +35,15 @@ fun AppNavigation(
                SplashScreen(
                    uiEvent = viewModel.uiEvent,
                    onLogin = {
-                       //
-                       Log.d("dataxx", "AppNavigation: ")
+                       navController.navigate(Route.LOGIN){
+                           popUpTo(navController.graph.id) {}
+                       }
                    }
                )
+            }
+
+            composable(route = Route.LOGIN){
+                LoginScreen()
             }
         }
     }

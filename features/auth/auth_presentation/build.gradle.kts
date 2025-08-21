@@ -9,11 +9,12 @@ apply {
 }
 
 android {
-    namespace = "com.meetmax.ui"
+    namespace = "com.meetmax.auth_presentation"
 
 }
 
 dependencies {
-    implementation(libs.androidx.junit)
-    androidTestImplementation(libs.junit)
+    implementation(project(Modules.DESIGN_SYSTEM))
+    implementation(project(Modules.COMMON))
+    implementation(project(Modules.UI))
 }

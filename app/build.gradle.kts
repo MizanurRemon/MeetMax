@@ -60,12 +60,11 @@ dependencies {
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
-
-
-
-
+    
     implementation(project(Modules.DESIGN_SYSTEM))
     implementation(project(Modules.COMMON))
+
+    implementation(project(Modules.AUTH_PRESENTATION))
     /*
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.DATABASE))
@@ -75,7 +74,7 @@ dependencies {
     implementation(project(Modules.DATA))
     implementation(project(Modules.UI))*/
 
-   /* implementation(project(Modules.AUTH_PRESENTATION))
+   /*
     implementation(project(Modules.AUTH_DOMAIN))
     implementation(project(Modules.AUTH_DATA))*/
 
