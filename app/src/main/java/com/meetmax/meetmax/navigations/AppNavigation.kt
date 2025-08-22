@@ -13,6 +13,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.meetmax.auth_presentaion.login.LoginScreen
+import com.meetmax.auth_presentaion.login.LoginViewModel
 import com.meetmax.common.navigation.Route
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
@@ -43,7 +44,11 @@ fun AppNavigation(
             }
 
             composable(route = Route.LOGIN){
-                LoginScreen()
+                val viewModel = hiltViewModel<LoginViewModel>()
+                LoginScreen(
+                    onEvent = viewModel::onEvent,
+                    state = viewModel.state
+                )
             }
         }
     }
