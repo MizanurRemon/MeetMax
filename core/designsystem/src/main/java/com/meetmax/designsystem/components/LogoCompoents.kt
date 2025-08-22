@@ -24,6 +24,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.meetmax.designsystem.r
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
 import com.meetmax.designsystem.theme.displayMediumTextStyle
@@ -43,15 +44,15 @@ fun LogoWithTextVerticalPlain(
     Row(
         modifier = modifier
             .background(bgColor)
-            .padding(vertical = 16.r())
+            .padding(vertical = 16.dp)
     ) {
         Image(
             painter = painterResource(DesignSystemR.drawable.ic_logo),
-            modifier = Modifier.size(iconSize.r()),
+            modifier = Modifier.size(iconSize.dp),
             contentDescription = null
         )
 
-        Spacer(modifier = Modifier.width(6.r()))
+        Spacer(modifier = Modifier.width(6.dp))
 
         Text(
             text = stringResource(title),

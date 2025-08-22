@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.meetmax.designsystem.r
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
 import com.meetmax.common.R as CommonR
@@ -51,26 +52,26 @@ fun AuthTopBar(onLanguageClick: () -> Unit) {
             colors = CardDefaults.cardColors(
                 containerColor = Color.White
             ),
-            shape = RoundedCornerShape(4.r()),
+            shape = RoundedCornerShape(4.dp),
             modifier = Modifier.shadow(
-                elevation = 5.r(),
+                elevation = 5.dp,
                 spotColor = Color.LightGray,
-                shape = RoundedCornerShape(4.r())
+                shape = RoundedCornerShape(4.dp)
             )
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
-                modifier = Modifier.padding(vertical = 4.r(), horizontal = 10.r())
+                modifier = Modifier.padding(vertical = 4.dp, horizontal = 10.dp)
             ) {
                 Text(
                     text = "English (UK)", style = bodyRegularM4TextStyle
                 )
 
-                Spacer(modifier = Modifier.width(7.r()))
+                Spacer(modifier = Modifier.width(7.dp))
 
                 Image(
                     painter = painterResource(DesignSystemR.drawable.ic_angle_down),
-                    modifier = Modifier.size(12.r()),
+                    modifier = Modifier.size(12.dp),
                     contentDescription = null
                 )
             }

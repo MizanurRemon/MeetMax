@@ -23,10 +23,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.meetmax.designsystem.r
 import com.meetmax.designsystem.theme.bodyMedium1TextStyle
 import com.meetmax.designsystem.theme.bodyMedium3TextStyle
 import com.meetmax.designsystem.theme.grayScale
+import com.meetmax.designsystem.theme.primaryBlue
 import com.meetmax.designsystem.R as DesignSystemR
 import com.meetmax.common.R as CommonR
 
@@ -34,7 +36,7 @@ import com.meetmax.common.R as CommonR
 fun AppActionButton(
     @DrawableRes icon: Int? = null,
     @StringRes text: Int,
-    bgColor: Color,
+    bgColor: Color = primaryBlue,
     onClick: () -> Unit,
     textStyle: TextStyle = bodyMedium1TextStyle,
     radius: Int = 6,
@@ -44,7 +46,7 @@ fun AppActionButton(
         modifier = modifier
             .fillMaxWidth()
             .background(color = bgColor, shape = RoundedCornerShape(radius))
-            .padding(10.r())
+            .padding(10.dp)
             .clickable {
                 onClick()
             }
@@ -60,7 +62,7 @@ fun AppActionButton(
                     contentDescription = null,
                     painter = painterResource(icon)
                 )
-                Spacer(modifier = Modifier.width(8.r()))
+                Spacer(modifier = Modifier.width(8.dp))
             }
             Text(
                 text = stringResource(text),
@@ -76,10 +78,11 @@ fun PreviewAppActionButton() {
     AppActionButton(
         icon = DesignSystemR.drawable.ic_google,
         text = CommonR.string.log_in_with_google,
-        bgColor = grayScale.copy(alpha = .05f),
+        bgColor = grayScale.copy(0.05f),
         onClick = {},
         textStyle = bodyMedium3TextStyle.copy(
             color = grayScale
-        )
+        ),
+        radius = 16
     )
 }
