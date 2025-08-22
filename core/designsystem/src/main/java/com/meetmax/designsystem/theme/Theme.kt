@@ -13,6 +13,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import com.meetmax.designsystem.ssp
 
 private val DarkColorScheme = darkColorScheme(
@@ -62,131 +63,131 @@ fun MeetMaxTheme(
 
 val heading1TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 30.ssp(),
+    fontSize = 30.sp,
     color = grayScale,
     fontWeight = FontWeight.W900,
     textAlign = TextAlign.Center,
-    lineHeight = 46.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 46.sp,
+    letterSpacing = 0.sp
 )
 
 
 val heading2TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 26.ssp(),
+    fontSize = 26.sp,
     color = grayScale,
     fontWeight = FontWeight.W700,
     textAlign = TextAlign.Center,
-    lineHeight = 40.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 40.sp,
+    letterSpacing = 0.sp
 )
 
 val heading3TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 18.ssp(),
+    fontSize = 18.sp,
     color = grayScale,
     fontWeight = FontWeight.W700,
     textAlign = TextAlign.Center,
-    lineHeight = 28.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 28.sp,
+    letterSpacing = 0.sp
 )
 
 val displayBoldTextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 16.ssp(),
+    fontSize = 16.sp,
     color = grayScale,
     fontWeight = FontWeight.W700,
     textAlign = TextAlign.Center,
-    lineHeight = 24.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 24.sp,
+    letterSpacing = 0.sp
 )
 
 val displayMediumTextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 16.ssp(),
+    fontSize = 16.sp,
     color = grayScale,
     fontWeight = FontWeight.W500,
     textAlign = TextAlign.Center,
-    lineHeight = 24.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 24.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyBoldTextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 14.ssp(),
+    fontSize = 14.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W700,
     textAlign = TextAlign.Center,
-    lineHeight = 22.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 22.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyMedium1TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 14.ssp(),
+    fontSize = 14.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W500,
     textAlign = TextAlign.Center,
-    lineHeight = 22.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 22.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyMedium2TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 13.ssp(),
+    fontSize = 13.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W500,
     textAlign = TextAlign.Center,
-    lineHeight = 18.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 18.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyMedium3TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 12.ssp(),
+    fontSize = 12.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W500,
     textAlign = TextAlign.Center,
-    lineHeight = 18.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 18.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyRegularTextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 14.ssp(),
+    fontSize = 14.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W400,
     textAlign = TextAlign.Center,
-    lineHeight = 22.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 22.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyRegularM3TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 12.ssp(),
+    fontSize = 12.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W400,
     textAlign = TextAlign.Center,
-    lineHeight = 18.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 18.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyRegularM4TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 10.ssp(),
+    fontSize = 10.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W500,
     textAlign = TextAlign.Center,
-    lineHeight = 16.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 16.sp,
+    letterSpacing = 0.sp
 )
 
 val bodyRegular4TextStyle = TextStyle(
     fontFamily = fontRoboto,
-    fontSize = 10.ssp(),
+    fontSize = 10.sp,
     color = Color(0xFFB0B7C3),
     fontWeight = FontWeight.W400,
     textAlign = TextAlign.Center,
-    lineHeight = 16.ssp(),
-    letterSpacing = 0.ssp()
+    lineHeight = 16.sp,
+    letterSpacing = 0.sp
 )

@@ -7,10 +7,10 @@ import androidx.compose.ui.graphics.Color
 val appBrush = Brush.verticalGradient(
     colors = listOf(
         Color.White.copy(alpha = 0.9f), // 40%
-        Color.White  // 10%
+        Color(0xFFF9F9F9)  // 10%
     )
 )
-val BACKGROUND_COLOR = Color(0xFFFFFFFF)
+val BACKGROUND_COLOR = Color(0xFFF9F9F9)//#F9F9F9
 
 val darkColor1 = Color(0xFF191C21)//#191C21
 val darkColor2 = Color(0xFF212833)//#212833
