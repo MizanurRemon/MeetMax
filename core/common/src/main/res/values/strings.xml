@@ -8,4 +8,10 @@
     <string name="log_in_with_google">Log in with Google</string>
     <string name="log_in_with_apple">Log in with Apple</string>
     <string name="your_email">Your Email</string>
+    <string name="or">OR</string>
+    <string name="create_password">Create Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="you_have_not_any_account">You haven\'t any account?</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
