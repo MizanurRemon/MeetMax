@@ -27,4 +27,10 @@
     <string name="done">Done</string>
     <string name="dismiss">Dismiss</string>
     <string name="pick_date">Pick Date</string>
+    <string name="search_for_something_here">Search for something here&#8230;</string>
+    <string name="feed">Feed</string>
+    <string name="my_community">My community</string>
+    <string name="explore">Explore</string>
+    <string name="notification">Notification</string>
+    <string name="settings">Settings</string>
 </resources>

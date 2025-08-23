@@ -19,6 +19,7 @@ import com.meetmax.auth_presentaion.login.LoginViewModel
 import com.meetmax.auth_presentaion.registration.SignUpScreen
 import com.meetmax.auth_presentaion.registration.SignUpViewModel
 import com.meetmax.common.navigation.Route
+import com.meetmax.meetmax.home.HomeScreen
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
 
@@ -40,7 +41,7 @@ fun AppNavigation(
                 SplashScreen(
                     uiEvent = viewModel.uiEvent,
                     onLogin = {
-                        navController.navigate(Route.LOGIN) {
+                        navController.navigate(Route.HOME) {
                             popUpTo(navController.graph.id) {}
                         }
                     }
@@ -81,6 +82,10 @@ fun AppNavigation(
                         navController.navigateUp()
                     }
                 )
+            }
+
+            composable(route = Route.HOME) {
+                HomeScreen()
             }
         }
     }
