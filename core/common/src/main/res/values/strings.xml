@@ -17,4 +17,14 @@
     <string name="enter_your_details_to_receive_a_rest_link">Enter your details to receive a rest link</string>
     <string name="send">Send</string>
     <string name="back_to_sign_in">&lt;\tBack to Sign In</string>
+    <string name="getting_started">Getting Started</string>
+    <string name="create_an_account_to_continue_and_connect_with_the_people">Create an account to continue and connect with the people.</string>
+    <string name="your_name">Your Name</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="done">Done</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="pick_date">Pick Date</string>
 </resources>

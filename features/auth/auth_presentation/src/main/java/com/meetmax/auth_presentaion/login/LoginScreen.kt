@@ -32,7 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.AuthTopBar
-import com.meetmax.designsystem.components.EmailTextField
+import com.meetmax.designsystem.components.CommonTextField
 import com.meetmax.designsystem.components.OrDividerComponent
 import com.meetmax.designsystem.components.PasswordTextField
 import com.meetmax.designsystem.rippleClickable
@@ -170,7 +170,7 @@ fun ContentBox(
                 modifier = Modifier.padding(top = 26.dp, bottom = 24.dp)
             )
 
-            EmailTextField(
+            CommonTextField(
                 value = state.email,
                 onValueChange = { onEvent(LoginEvent.OnEmailEnter(it)) },
                 isTouched = state.isEmailTouched,
@@ -233,7 +233,22 @@ fun ContentBox(
                 )
             }
 
-            Spacer(modifier = Modifier.height(14.dp))
+
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            AppActionButton(
+                text = CommonR.string.sign_in,
+                bgColor = primaryBlue,
+                onClick = {
+
+                },
+                textStyle = bodyMedium1TextStyle.copy(color = Color.White),
+                radius = 6,
+                modifier = Modifier.height(40.dp)
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
 
             Text(
                 modifier = Modifier
@@ -251,19 +266,6 @@ fun ContentBox(
                     },
                 text = annotateSignUpString,
                 style = bodyMedium3TextStyle
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            AppActionButton(
-                text = CommonR.string.sign_in,
-                bgColor = primaryBlue,
-                onClick = {
-
-                },
-                textStyle = bodyMedium1TextStyle.copy(color = Color.White),
-                radius = 6,
-                modifier = Modifier.height(40.dp)
             )
 
         }

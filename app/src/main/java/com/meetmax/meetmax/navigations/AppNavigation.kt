@@ -17,6 +17,7 @@ import com.meetmax.auth_presentaion.forgot_password.ForgotPasswordViewModel
 import com.meetmax.auth_presentaion.login.LoginScreen
 import com.meetmax.auth_presentaion.login.LoginViewModel
 import com.meetmax.auth_presentaion.registration.SignUpScreen
+import com.meetmax.auth_presentaion.registration.SignUpViewModel
 import com.meetmax.common.navigation.Route
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
@@ -36,17 +37,17 @@ fun AppNavigation(
         ) {
             composable(Route.SPLASH) {
                 val viewModel = hiltViewModel<SplashViewModel>()
-               SplashScreen(
-                   uiEvent = viewModel.uiEvent,
-                   onLogin = {
-                       navController.navigate(Route.LOGIN){
-                           popUpTo(navController.graph.id) {}
-                       }
-                   }
-               )
+                SplashScreen(
+                    uiEvent = viewModel.uiEvent,
+                    onLogin = {
+                        navController.navigate(Route.LOGIN) {
+                            popUpTo(navController.graph.id) {}
+                        }
+                    }
+                )
             }
 
-            composable(route = Route.LOGIN){
+            composable(route = Route.LOGIN) {
                 val viewModel = hiltViewModel<LoginViewModel>()
                 LoginScreen(
                     onEvent = viewModel::onEvent,
@@ -60,7 +61,7 @@ fun AppNavigation(
                 )
             }
 
-            composable(route = Route.FORGOT_PASSWORD){
+            composable(route = Route.FORGOT_PASSWORD) {
                 val viewModel = hiltViewModel<ForgotPasswordViewModel>()
                 ForgotPasswordScreen(
                     onEvent = viewModel::onEvent,
@@ -71,8 +72,13 @@ fun AppNavigation(
                 )
             }
 
-            composable(route = Route.SIGN_UP){
-                SignUpScreen()
+            composable(route = Route.SIGN_UP) {
+                val viewModel = hiltViewModel<SignUpViewModel>()
+                SignUpScreen(
+                    state = viewModel.state,
+                    onEvent = viewModel::onEvent,
+                    onSignIn = {}
+                )
             }
         }
     }

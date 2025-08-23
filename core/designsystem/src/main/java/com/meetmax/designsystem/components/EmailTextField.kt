@@ -1,5 +1,6 @@
 package com.meetmax.designsystem.components
 
+import android.annotation.SuppressLint
 import android.util.Patterns
 import android.view.MotionEvent
 import androidx.compose.foundation.Image
@@ -41,17 +42,21 @@ import com.meetmax.designsystem.theme.primaryBlue
 import com.meetmax.designsystem.R as DesignSystemR
 
 @Composable
-fun EmailTextField(
+fun CommonTextField(
+    readOnly: Boolean = false,
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
+    @SuppressLint("ModifierParameter") modifier: Modifier = Modifier,
     placeholder: String,
     isTouched: Boolean,
     isValid: Boolean,
     onTouched: () -> Unit,
     leadingIcon: Painter,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    textStyle: TextStyle = bodyMedium1TextStyle.copy(color = Color.Black, textAlign = TextAlign.Start),
+    textStyle: TextStyle = bodyMedium1TextStyle.copy(
+        color = Color.Black,
+        textAlign = TextAlign.Start
+    ),
     cursorColor: Color = primaryBlue,
     shape: RoundedCornerShape = RoundedCornerShape(6.dp)
 ) {
@@ -91,6 +96,7 @@ fun EmailTextField(
         Spacer(modifier = Modifier.width(8.dp))
 
         BasicTextField(
+            readOnly = readOnly,
             value = value,
             onValueChange = onValueChange,
             singleLine = true,
@@ -119,7 +125,7 @@ fun PreviewEmailTextField() {
     var email by remember { mutableStateOf("") }
     var isTouched by remember { mutableStateOf(false) }
     val isValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
-    EmailTextField(
+    CommonTextField(
         value = email,
         onValueChange = { email = it },
         isTouched = isTouched,

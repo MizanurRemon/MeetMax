@@ -22,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.AuthTopBar
-import com.meetmax.designsystem.components.EmailTextField
+import com.meetmax.designsystem.components.CommonTextField
 import com.meetmax.designsystem.rippleClickable
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
 import com.meetmax.designsystem.theme.appBrush
@@ -83,7 +83,7 @@ fun ForgotPasswordScreen(
                 modifier = Modifier.padding(20.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                EmailTextField(
+                CommonTextField(
                     value = state.email,
                     onValueChange = { onEvent(ForgotPasswordEvent.OnEmailEnter(it)) },
                     isTouched = state.isEmailTouched,
