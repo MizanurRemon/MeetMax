@@ -53,7 +53,15 @@ class SignUpViewModel @Inject constructor() : ViewModel() {
             }
 
             is SignUpEvent.OnDateSelection -> {
-                state = state.copy(isDatePickerOpened = true)
+                state = state.copy(isDatePickerOpened = event.status)
+            }
+
+            is SignUpEvent.OnDateEnter-> {
+                state = state.copy(dob = event.date, isDatePickerOpened = false)
+            }
+
+            is SignUpEvent.OnOptionSelected -> {
+                state = state.copy(gender = event.gender)
             }
         }
     }

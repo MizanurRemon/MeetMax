@@ -1,7 +1,10 @@
 package com.meetmax.auth_presentaion.registration
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -9,14 +12,15 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,9 +31,10 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.meetmax.common.util.GENDER
 import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.AuthTopBar
 import com.meetmax.designsystem.components.CommonTextField
@@ -43,6 +48,7 @@ import com.meetmax.designsystem.theme.bodyMedium3TextStyle
 import com.meetmax.designsystem.theme.grayScale
 import com.meetmax.designsystem.theme.heading3TextStyle
 import com.meetmax.designsystem.theme.primaryBlue
+import com.meetmax.ui.DevicePreviews
 import com.meetmax.common.R as CommonR
 import com.meetmax.designsystem.R as DesignSystemR
 
@@ -209,20 +215,75 @@ private fun ContentBox(
 
             Spacer(modifier = Modifier.height(14.dp))
 
-            /*CommonTextField(
-                modifier = MOdi,
+            CommonTextField(
                 readOnly = true,
                 value = state.dob,
                 onValueChange = {
-                    //onEvent(SignUpEvent.OnNameInput(it))
+                    //onEvent(SignUpEvent.OnDateEnter(it))
                 },
                 isTouched = false,
                 isValid = true,
-                onTouched = { },
+                onTouched = { onEvent(SignUpEvent.OnDateSelection(true)) },
                 placeholder = stringResource(id = CommonR.string.date_of_birth),
                 leadingIcon = painterResource(id = DesignSystemR.drawable.ic_calendar),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text)
-            )*/
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                textStyle = bodyMedium1TextStyle.copy(textAlign = TextAlign.Start)
+            )
+
+            Spacer(modifier = Modifier.height(14.dp))
+
+            Box(
+                modifier = Modifier
+                    .height(40.dp)
+                    .fillMaxWidth()
+                    .border(
+                        width = 1.dp,
+                        shape = RoundedCornerShape(6.dp),
+                        color = grayScale.copy(.2f)
+                    )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(start = 10.dp)
+                        .align(Alignment.CenterStart),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Image(
+                        painter = painterResource(DesignSystemR.drawable.ic_gender),
+                        contentDescription = null,
+                        modifier = Modifier.size(16.dp)
+                    )
+
+                    GENDER.forEach { option ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier
+                                //.fillMaxWidth()
+                                // .clickable {  }
+                                .padding(vertical = 8.dp, horizontal = 12.dp)
+                        ) {
+                            RadioButton(
+                                colors = RadioButtonDefaults.colors(
+                                    selectedColor = primaryBlue,
+                                    unselectedColor = grayScale
+                                ),
+                                modifier = Modifier.size(16.dp),
+                                selected = (option == state.gender),
+                                onClick = { onEvent(SignUpEvent.OnOptionSelected(option)) }
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = stringResource(option),
+                                style = bodyMedium1TextStyle.copy(
+                                    color = if (option == state.gender) grayScale else grayScale.copy(
+                                        alpha = .6f
+                                    )
+                                )
+                            )
+                        }
+                    }
+                }
+            }
 
             Spacer(modifier = Modifier.height(20.dp))
 
@@ -263,17 +324,17 @@ private fun ContentBox(
     if (state.isDatePickerOpened) {
         MyDatePickerDialog(
             onDateSelected = {
-                onEvent(SignUpEvent.OnDateSelection)
+                onEvent(SignUpEvent.OnDateEnter(it))
             },
-            openDialog = remember {
-                mutableStateOf(state.isDatePickerOpened)
+            onDismiss = {
+                onEvent(SignUpEvent.OnDateSelection(false))
             }
         )
     }
 }
 
 @Composable
-@Preview
+@DevicePreviews
 fun PreviewSignUpScreen() {
     SignUpScreen(
         state = SignUpState(),

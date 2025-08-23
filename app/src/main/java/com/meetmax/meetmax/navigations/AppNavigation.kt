@@ -77,7 +77,9 @@ fun AppNavigation(
                 SignUpScreen(
                     state = viewModel.state,
                     onEvent = viewModel::onEvent,
-                    onSignIn = {}
+                    onSignIn = {
+                        navController.navigateUp()
+                    }
                 )
             }
         }

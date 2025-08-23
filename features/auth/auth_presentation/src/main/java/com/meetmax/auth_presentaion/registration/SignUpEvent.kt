@@ -7,5 +7,7 @@ sealed class SignUpEvent {
     data object OnPasswordTouchedListener : SignUpEvent()
     data class OnNameInput(val name : String) : SignUpEvent()
     data object OnNameInputTouchedListener : SignUpEvent()
-    data object OnDateSelection: SignUpEvent()
+    data class OnDateSelection(val status : Boolean): SignUpEvent()
+    data class OnDateEnter(val date : String) : SignUpEvent()
+    data class OnOptionSelected(val gender: Int) : SignUpEvent()
 }

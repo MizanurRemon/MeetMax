@@ -1,6 +1,7 @@
 package com.meetmax.auth_presentaion.registration
 
 import com.meetmax.common.util.currentDate
+import com.meetmax.common.R as CommonR
 
 data class SignUpState(
     val isMailValid: Boolean = false,
@@ -13,5 +14,6 @@ data class SignUpState(
     val name: String = "",
     val isNameTouched: Boolean = false,
     val dob: String = currentDate(),
-    val isDatePickerOpened: Boolean = false
+    val isDatePickerOpened: Boolean = false,
+    val gender : Int = CommonR.string.male
 )

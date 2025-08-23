@@ -1,5 +1,6 @@
 package com.meetmax.designsystem.dialogs
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -26,7 +27,7 @@ import com.meetmax.common.R as CommonR
 @Composable
 fun MyDatePickerDialog(
     onDateSelected: (String) -> Unit,
-    openDialog: MutableState<Boolean>,
+    onDismiss: () -> Unit
 ) {
     val datePickerState = rememberDatePickerState(
         selectableDates = object : SelectableDates {
@@ -37,56 +38,51 @@ fun MyDatePickerDialog(
 
     val selectedDate = datePickerState.selectedDateMillis?.let {
         convertMillisToDate(it)
-    } ?: ""//currentDate()
+    } ?: currentDate()
 
 
-    if (openDialog.value) {
-        DatePickerDialog(
-            onDismissRequest = { openDialog.value = false },
-            confirmButton = {
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = primaryBlue
-                    ), onClick = {
-                        onDateSelected(selectedDate)
-                        openDialog.value = false
-                    }) {
-                    Text(text = stringResource(id = CommonR.string.done))
-                }
-            },
-            dismissButton = {
-                Button(
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = primaryBlue
-                    ),
-                    onClick = {
-                        openDialog.value = false
-                    }) {
-                    Text(text = stringResource(id = CommonR.string.dismiss))
-                }
+    DatePickerDialog(
+        onDismissRequest = { onDismiss() },
+        confirmButton = {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = primaryBlue
+                ), onClick = {
+                    onDateSelected(selectedDate)
+                }) {
+                Text(text = stringResource(id = CommonR.string.done))
             }
-        ) {
-            DatePicker(
-                title = {
-                    Text(
-                        modifier = Modifier.padding(20.dp),
-                        text = stringResource(id = CommonR.string.pick_date)
-                    )
-                },
-                state = datePickerState,
-            )
+        },
+        dismissButton = {
+            Button(
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = primaryBlue
+                ),
+                onClick = {
+                    onDismiss
+                }) {
+                Text(text = stringResource(id = CommonR.string.dismiss))
+            }
         }
+    ) {
+        DatePicker(
+            title = {
+                Text(
+                    modifier = Modifier.padding(20.dp),
+                    text = stringResource(id = CommonR.string.pick_date)
+                )
+            },
+            state = datePickerState,
+        )
     }
 }
 
 @Composable
 @Preview
 fun PreviewDatePickerDialog() {
-    val openDialog = remember {
-        mutableStateOf(true)
-    }
+
     MyDatePickerDialog(
         onDateSelected = {},
-        openDialog = openDialog
+        onDismiss = {}
     )
 }
