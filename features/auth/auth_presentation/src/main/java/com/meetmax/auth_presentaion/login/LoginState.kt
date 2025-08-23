@@ -6,5 +6,6 @@ data class LoginState(
     val password: String = "",
     val isPasswordValid: Boolean = false,
     val isEmailTouched: Boolean = false,
-    val isPasswordTouched: Boolean = false
+    val isPasswordTouched: Boolean = false,
+    val isRememberMeChecked: Boolean = false
 )

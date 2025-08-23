@@ -5,7 +5,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -25,13 +24,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.meetmax.designsystem.r
+import com.meetmax.designsystem.rippleClickable
 import com.meetmax.designsystem.theme.bodyMedium1TextStyle
 import com.meetmax.designsystem.theme.bodyMedium3TextStyle
 import com.meetmax.designsystem.theme.grayScale
 import com.meetmax.designsystem.theme.primaryBlue
-import com.meetmax.designsystem.R as DesignSystemR
 import com.meetmax.common.R as CommonR
+import com.meetmax.designsystem.R as DesignSystemR
 
 @Composable
 fun AppActionButton(
@@ -48,13 +47,14 @@ fun AppActionButton(
             .fillMaxWidth()
             .background(color = bgColor, shape = RoundedCornerShape(radius))
             .padding(10.dp)
-            .clickable {
+            .rippleClickable {
                 onClick()
             }
             .clip(RoundedCornerShape(radius.dp))
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .align(Alignment.Center),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {

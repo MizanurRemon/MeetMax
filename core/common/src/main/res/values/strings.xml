@@ -14,4 +14,7 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="you_have_not_any_account">You haven\'t any account?</string>
     <string name="sign_up">Sign Up</string>
+    <string name="enter_your_details_to_receive_a_rest_link">Enter your details to receive a rest link</string>
+    <string name="send">Send</string>
+    <string name="back_to_sign_in">&lt;\tBack to Sign In</string>
 </resources>

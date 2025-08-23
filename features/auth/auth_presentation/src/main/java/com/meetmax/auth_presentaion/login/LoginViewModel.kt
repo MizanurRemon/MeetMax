@@ -42,6 +42,10 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             is LoginEvent.OnPasswordTouchedListener -> {
                 state = state.copy(isPasswordTouched = true)
             }
+
+            is LoginEvent.OnRememberMeChecked-> {
+                state = state.copy(isRememberMeChecked = event.state)
+            }
         }
 
 

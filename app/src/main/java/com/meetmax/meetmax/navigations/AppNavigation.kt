@@ -12,8 +12,11 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.meetmax.auth_presentaion.forgot_password.ForgotPasswordScreen
+import com.meetmax.auth_presentaion.forgot_password.ForgotPasswordViewModel
 import com.meetmax.auth_presentaion.login.LoginScreen
 import com.meetmax.auth_presentaion.login.LoginViewModel
+import com.meetmax.auth_presentaion.registration.SignUpScreen
 import com.meetmax.common.navigation.Route
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
@@ -47,8 +50,29 @@ fun AppNavigation(
                 val viewModel = hiltViewModel<LoginViewModel>()
                 LoginScreen(
                     onEvent = viewModel::onEvent,
-                    state = viewModel.state
+                    state = viewModel.state,
+                    onForgotPassword = {
+                        navController.navigate(Route.FORGOT_PASSWORD)
+                    },
+                    onSignUp = {
+                        navController.navigate(Route.SIGN_UP)
+                    }
                 )
+            }
+
+            composable(route = Route.FORGOT_PASSWORD){
+                val viewModel = hiltViewModel<ForgotPasswordViewModel>()
+                ForgotPasswordScreen(
+                    onEvent = viewModel::onEvent,
+                    state = viewModel.state,
+                    onBack = {
+                        navController.navigateUp()
+                    }
+                )
+            }
+
+            composable(route = Route.SIGN_UP){
+                SignUpScreen()
             }
         }
     }
