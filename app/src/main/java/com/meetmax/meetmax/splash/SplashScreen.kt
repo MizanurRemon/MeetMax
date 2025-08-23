@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.meetmax.common.util.UiEvent
 import com.meetmax.designsystem.r
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
@@ -63,10 +64,10 @@ fun SplashScreen(
                 DesignSystemR.drawable.ic_logo
             ),
             contentDescription = null,
-            modifier = Modifier.size(100.r())
+            modifier = Modifier.size(100.dp)
         )
 
-        Spacer(modifier = Modifier.height(10.r()))
+        Spacer(modifier = Modifier.height(10.dp))
         Text(
             text = stringResource(CommonR.string.app_name),
             style = heading3TextStyle

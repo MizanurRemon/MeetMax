@@ -35,7 +35,7 @@
             <option value="$PROJECT_DIR$/features/auth" />
             <option value="$PROJECT_DIR$/features/auth/auth_data" />
             <option value="$PROJECT_DIR$/features/auth/auth_domain" />
-            <option value="$PROJECT_DIR$/features/auth/auth_presentaion" />
+            <option value="$PROJECT_DIR$/features/auth/auth_presentation" />
           </set>
         </option>
       </GradleProjectSettings>

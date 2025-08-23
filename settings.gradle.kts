@@ -23,7 +23,7 @@ rootProject.name = "MeetMax"
 include(":app")
 include(":features:auth:auth_data")
 include(":features:auth:auth_domain")
-include(":features:auth:auth_presentaion")
+include(":features:auth:auth_presentation")
 include(":core:common")
 include(":core:data")
 include(":core:database")
