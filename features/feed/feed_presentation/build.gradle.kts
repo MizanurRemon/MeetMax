@@ -19,4 +19,7 @@ dependencies {
     implementation(project(Modules.UI))
 
     implementation(libs.coil.compose)
+    implementation(libs.credentials.play)
+    implementation(libs.credentials)
+    implementation(libs.googleid)
 }

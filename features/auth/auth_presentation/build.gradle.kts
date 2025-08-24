@@ -14,7 +14,11 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.AUTH_DOMAIN))
     implementation(project(Modules.DESIGN_SYSTEM))
     implementation(project(Modules.COMMON))
     implementation(project(Modules.UI))
+
+    implementation (libs.play.services.auth)
+    implementation(libs.androidx.credentials)
 }

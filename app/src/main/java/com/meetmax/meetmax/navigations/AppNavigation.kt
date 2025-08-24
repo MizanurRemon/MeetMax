@@ -61,7 +61,8 @@ fun AppNavigation(
                     },
                     onSignIn = {
                         navController.navigate(Route.HOME)
-                    }
+                    },
+                    launchSignInIntentFlow = viewModel.launchSignInIntent
                 )
             }
 

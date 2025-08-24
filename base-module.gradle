@@ -35,6 +35,12 @@ android {
 }
 
 dependencies {
+    implementation(libs.credentials.play)
+    implementation(libs.credentials)
+    implementation(libs.googleid)
+    implementation (libs.play.services.auth)
+
+
     kapt libs.hilt.compiler
     implementation libs.hilt.android
     implementation libs.androidx.material3
@@ -58,4 +64,10 @@ dependencies {
     androidTestImplementation(libs.mockk)
     androidTestImplementation(libs.mockwebserver)
     androidTestImplementation(libs.hilt.testing)
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+    androidTestImplementation(libs.androidx.espresso.core)
 }
