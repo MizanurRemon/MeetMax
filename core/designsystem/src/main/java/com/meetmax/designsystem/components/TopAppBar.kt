@@ -55,20 +55,22 @@ fun TopAppBar(
         ) {
             val (leftIcon, textField, rightIcon) = createRefs()
 
-            // Left image
-            Image(
-                painter = painterResource(DesignSystemR.drawable.ic_person_avatar),
-                contentDescription = null,
+            Box(
                 modifier = Modifier
                     .constrainAs(leftIcon) {
                         start.linkTo(parent.start)
                         top.linkTo(parent.top)
                         bottom.linkTo(parent.bottom)
                     }
-                    .size(32.dp)
-                    .clip(RoundedCornerShape(10.dp)),
-                contentScale = ContentScale.Crop
-            )
+            ) {
+                DrawableCircleImage(
+                    imageUrl = DesignSystemR.drawable.ic_person_avatar,
+                    size = 32,
+                    contentScale = ContentScale.Crop,
+                    shape = RoundedCornerShape(10.dp)
+                )
+            }
+
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,

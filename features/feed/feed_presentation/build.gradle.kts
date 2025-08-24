@@ -17,4 +17,6 @@ dependencies {
     implementation(project(Modules.DESIGN_SYSTEM))
     implementation(project(Modules.COMMON))
     implementation(project(Modules.UI))
+
+    implementation(libs.coil.compose)
 }
