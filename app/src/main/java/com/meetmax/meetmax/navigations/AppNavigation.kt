@@ -85,7 +85,8 @@ fun AppNavigation(
             }
 
             composable(route = Route.HOME) {
-                HomeScreen()
+                HomeScreen(
+                )
             }
         }
     }

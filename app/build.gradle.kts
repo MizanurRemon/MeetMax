@@ -65,6 +65,8 @@ dependencies {
     implementation(project(Modules.COMMON))
 
     implementation(project(Modules.AUTH_PRESENTATION))
+
+    implementation(project(Modules.FEED_PRESENTATION))
     /*
     implementation(project(Modules.NETWORK))
     implementation(project(Modules.DATABASE))
