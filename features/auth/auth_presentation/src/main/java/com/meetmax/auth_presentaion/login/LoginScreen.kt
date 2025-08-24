@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -52,6 +53,7 @@ fun LoginScreen(
     onEvent: (LoginEvent) -> Unit,
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
+    onSignIn: () -> Unit
 ) {
 
     val annotateSignUpString = buildAnnotatedString {
@@ -107,7 +109,10 @@ fun LoginScreen(
             onSignUp = {
                 onSignUp()
             },
-            annotateSignUpString = annotateSignUpString
+            annotateSignUpString = annotateSignUpString,
+            onSignIn = {
+                onSignIn()
+            }
         )
     }
 }
@@ -118,7 +123,8 @@ fun ContentBox(
     onEvent: (LoginEvent) -> Unit,
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
-    annotateSignUpString: AnnotatedString
+    annotateSignUpString: AnnotatedString,
+    onSignIn: () -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -241,11 +247,11 @@ fun ContentBox(
                 text = CommonR.string.sign_in,
                 bgColor = primaryBlue,
                 onClick = {
-
+                    onSignIn()
                 },
                 textStyle = bodyMedium1TextStyle.copy(color = Color.White),
                 radius = 6,
-                modifier = Modifier.height(40.dp)
+                modifier = Modifier.height(40.dp).fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -282,6 +288,7 @@ fun PreviewLoginScreen() {
         ),
         onEvent = {},
         onForgotPassword = {},
-        onSignUp = {}
+        onSignUp = {},
+        onSignIn = {}
     )
 }

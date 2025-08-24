@@ -41,7 +41,7 @@ fun AppNavigation(
                 SplashScreen(
                     uiEvent = viewModel.uiEvent,
                     onLogin = {
-                        navController.navigate(Route.HOME) {
+                        navController.navigate(Route.LOGIN) {
                             popUpTo(navController.graph.id) {}
                         }
                     }
@@ -58,6 +58,9 @@ fun AppNavigation(
                     },
                     onSignUp = {
                         navController.navigate(Route.SIGN_UP)
+                    },
+                    onSignIn = {
+                        navController.navigate(Route.HOME)
                     }
                 )
             }

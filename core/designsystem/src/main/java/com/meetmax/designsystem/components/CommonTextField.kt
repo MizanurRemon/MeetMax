@@ -51,7 +51,7 @@ fun CommonTextField(
     isTouched: Boolean,
     isValid: Boolean,
     onTouched: () -> Unit,
-    leadingIcon: Painter,
+    leadingIcon: Painter?,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     textStyle: TextStyle = bodyMedium1TextStyle.copy(
         color = Color.Black,
@@ -87,11 +87,14 @@ fun CommonTextField(
             }
     ) {
 
-        Image(
-            painter = leadingIcon,
-            contentDescription = null,
-            modifier = Modifier.size(16.dp)
-        )
+        leadingIcon?.let {
+            Image(
+                painter = it,
+                contentDescription = null,
+                modifier = Modifier.size(16.dp)
+            )
+        }
+
 
         Spacer(modifier = Modifier.width(8.dp))
 

@@ -95,6 +95,7 @@ fun ForgotPasswordScreen(
                 )
                 Spacer(modifier = Modifier.height(14.dp))
                 AppActionButton(
+                    modifier = Modifier.fillMaxWidth(),
                     onClick = {
 
                     },

@@ -295,7 +295,7 @@ private fun ContentBox(
                 },
                 textStyle = bodyMedium1TextStyle.copy(color = Color.White),
                 radius = 6,
-                modifier = Modifier.height(40.dp)
+                modifier = Modifier.height(40.dp).fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(20.dp))
