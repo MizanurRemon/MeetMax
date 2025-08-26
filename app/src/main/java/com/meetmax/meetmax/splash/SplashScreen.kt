@@ -18,7 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meetmax.common.util.UiEvent
-import com.meetmax.designsystem.r
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
 import com.meetmax.designsystem.theme.heading3TextStyle
 import kotlinx.coroutines.flow.Flow
@@ -29,7 +28,8 @@ import com.meetmax.designsystem.R as DesignSystemR
 @Composable
 fun SplashScreen(
     uiEvent: Flow<UiEvent>,
-    onLogin: () -> Unit
+    onLogin: () -> Unit,
+    onHome: () -> Unit
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -37,7 +37,7 @@ fun SplashScreen(
 
             when (event) {
                 is UiEvent.Success -> {
-
+                    onHome()
                 }
 
                 is UiEvent.ShowSnackbar -> {
@@ -82,6 +82,7 @@ fun SplashScreen(
 fun PreviewSplashScreen() {
     SplashScreen(
         uiEvent = flow { },
-        onLogin = {}
+        onLogin = {},
+        onHome = {}
     )
 }

@@ -2,8 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    //id("com.google.gms.google-services")
     id("kotlin-kapt")
+    //id("com.google.devtools.ksp")
     id ("dagger.hilt.android.plugin")
+    alias(libs.plugins.googleServices)
 }
 
 android {
@@ -56,27 +59,29 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.hilt.navigation.compose)
-
+    //implementation(libs.firebase.bom)
 
     implementation(libs.hilt.android)
     kapt(libs.hilt.compiler)
     
     implementation(project(Modules.DESIGN_SYSTEM))
     implementation(project(Modules.COMMON))
+    implementation(project(Modules.DATABASE))
 
     implementation(project(Modules.AUTH_PRESENTATION))
+    implementation(project(Modules.AUTH_DOMAIN))
+    implementation(project(Modules.AUTH_DATA))
+
+    implementation(project(Modules.FEED_PRESENTATION))
     /*
     implementation(project(Modules.NETWORK))
-    implementation(project(Modules.DATABASE))
     implementation(project(Modules.DATASTORE))
 
     implementation(project(Modules.DOMAIN))
     implementation(project(Modules.DATA))
     implementation(project(Modules.UI))*/
 
-   /*
-    implementation(project(Modules.AUTH_DOMAIN))
-    implementation(project(Modules.AUTH_DATA))*/
+
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

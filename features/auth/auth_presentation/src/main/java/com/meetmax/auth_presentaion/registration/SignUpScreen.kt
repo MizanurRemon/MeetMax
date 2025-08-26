@@ -1,5 +1,10 @@
 package com.meetmax.auth_presentaion.registration
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,11 +24,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,6 +45,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import com.meetmax.common.util.GENDER
+import com.meetmax.common.util.UiEvent
 import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.AuthTopBar
 import com.meetmax.designsystem.components.CommonTextField
@@ -49,16 +60,65 @@ import com.meetmax.designsystem.theme.grayScale
 import com.meetmax.designsystem.theme.heading3TextStyle
 import com.meetmax.designsystem.theme.primaryBlue
 import com.meetmax.ui.DevicePreviews
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flow
 import com.meetmax.common.R as CommonR
 import com.meetmax.designsystem.R as DesignSystemR
 
 
+@SuppressLint("ContextCastToActivity")
 @Composable
 fun SignUpScreen(
     state: SignUpState,
     onEvent: (SignUpEvent) -> Unit,
-    onSignIn: () -> Unit
+    onSignIn: () -> Unit,
+    launchSignInIntentFlow: Flow<Intent>,
+    uiEvent: Flow<UiEvent>,
+    onHome: ()-> Unit,
+    snackBarHostState: SnackbarHostState,
 ) {
+
+    val activity = LocalContext.current as? Activity
+    val context = LocalContext.current
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            onEvent(SignUpEvent.OnHandleGoogleSignInResult(result.data))
+        } else {
+            onEvent(SignUpEvent.OnHandleGoogleSignInResult(result.data))
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        launchSignInIntentFlow.collectLatest { intent ->
+            launcher.launch(intent)
+        }
+    }
+
+    LaunchedEffect(key1 = true) {
+        uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.Success -> {
+                    onHome()
+                }
+
+                is UiEvent.ShowSnackbar -> {
+                    snackBarHostState.showSnackbar(
+                        message = event.message.asString(context = context),
+                        duration = SnackbarDuration.Short,
+                    )
+                }
+
+                is UiEvent.NavigateUp -> {
+
+                }
+            }
+
+        }
+    }
 
     val annotateSignUpString = buildAnnotatedString {
         withStyle(style = SpanStyle(color = grayScale)) {
@@ -113,7 +173,8 @@ fun SignUpScreen(
             onSignIn = {
                 onSignIn()
             },
-            annotateSignUpString = annotateSignUpString
+            annotateSignUpString = annotateSignUpString,
+            activity = activity
         )
     }
 }
@@ -123,7 +184,8 @@ private fun ContentBox(
     state: SignUpState,
     onEvent: (SignUpEvent) -> Unit,
     onSignIn: () -> Unit,
-    annotateSignUpString: AnnotatedString
+    annotateSignUpString: AnnotatedString,
+    activity: Activity?
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -148,7 +210,9 @@ private fun ContentBox(
                     icon = DesignSystemR.drawable.ic_google,
                     text = CommonR.string.log_in_with_google,
                     bgColor = grayScale.copy(alpha = .05f),
-                    onClick = {},
+                    onClick = {
+                        onEvent(SignUpEvent.OnGoogleSignIn(activity))
+                    },
                     modifier = Modifier
                         .weight(1f),
                     radius = 6,
@@ -160,8 +224,8 @@ private fun ContentBox(
                 Spacer(modifier = Modifier.width(13.dp))
 
                 AppActionButton(
-                    icon = DesignSystemR.drawable.ic_google,
-                    text = CommonR.string.log_in_with_google,
+                    icon = DesignSystemR.drawable.ic_apple,
+                    text = CommonR.string.log_in_with_apple,
                     bgColor = grayScale.copy(alpha = .05f),
                     onClick = {},
                     modifier = Modifier.weight(1f),
@@ -295,7 +359,7 @@ private fun ContentBox(
                 },
                 textStyle = bodyMedium1TextStyle.copy(color = Color.White),
                 radius = 6,
-                modifier = Modifier.height(40.dp)
+                modifier = Modifier.height(40.dp).fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -339,6 +403,12 @@ fun PreviewSignUpScreen() {
     SignUpScreen(
         state = SignUpState(),
         onEvent = {},
-        onSignIn = {}
+        onSignIn = {},
+        launchSignInIntentFlow = flow { },
+        uiEvent = flow {  },
+        onHome = {},
+        snackBarHostState = remember {
+            SnackbarHostState()
+        }
     )
 }

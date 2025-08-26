@@ -1,11 +1,17 @@
 package com.meetmax.auth_presentaion.login
 
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -14,11 +20,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -30,6 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.meetmax.common.util.UiEvent
 import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.AuthTopBar
 import com.meetmax.designsystem.components.CommonTextField
@@ -43,16 +55,66 @@ import com.meetmax.designsystem.theme.bodyMedium3TextStyle
 import com.meetmax.designsystem.theme.grayScale
 import com.meetmax.designsystem.theme.heading3TextStyle
 import com.meetmax.designsystem.theme.primaryBlue
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flow
 import com.meetmax.common.R as CommonR
 import com.meetmax.designsystem.R as DesignSystemR
 
+@SuppressLint("ContextCastToActivity")
 @Composable
 fun LoginScreen(
+    snackBarHostState: SnackbarHostState,
     state: LoginState,
     onEvent: (LoginEvent) -> Unit,
+    uiEvent: Flow<UiEvent>,
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
+    onSignIn: () -> Unit,
+    launchSignInIntentFlow: Flow<Intent>,
+    onHome: ()-> Unit
 ) {
+    val activity = LocalContext.current as? Activity
+    val context = LocalContext.current
+
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            onEvent(LoginEvent.OnHandleGoogleSignInResult(result.data))
+        } else {
+            onEvent(LoginEvent.OnHandleGoogleSignInResult(result.data))
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        launchSignInIntentFlow.collectLatest { intent ->
+            launcher.launch(intent)
+        }
+    }
+
+    LaunchedEffect(key1 = true) {
+        uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.Success -> {
+                    onHome()
+                }
+
+                is UiEvent.ShowSnackbar -> {
+                    snackBarHostState.showSnackbar(
+                        message = event.message.asString(context = context),
+                        duration = SnackbarDuration.Short,
+                    )
+                }
+
+                is UiEvent.NavigateUp -> {
+
+                }
+            }
+
+        }
+    }
+
 
     val annotateSignUpString = buildAnnotatedString {
         withStyle(style = SpanStyle(color = grayScale)) {
@@ -107,18 +169,25 @@ fun LoginScreen(
             onSignUp = {
                 onSignUp()
             },
-            annotateSignUpString = annotateSignUpString
+            annotateSignUpString = annotateSignUpString,
+            onSignIn = {
+                onSignIn()
+            },
+            activity = activity
         )
     }
 }
 
+@SuppressLint("ContextCastToActivity")
 @Composable
 fun ContentBox(
     state: LoginState,
     onEvent: (LoginEvent) -> Unit,
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
-    annotateSignUpString: AnnotatedString
+    annotateSignUpString: AnnotatedString,
+    onSignIn: () -> Unit,
+    activity: Activity?
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
 
@@ -142,20 +211,23 @@ fun ContentBox(
                     icon = DesignSystemR.drawable.ic_google,
                     text = CommonR.string.log_in_with_google,
                     bgColor = grayScale.copy(alpha = .05f),
-                    onClick = {},
+                    onClick = {
+
+                        onEvent(LoginEvent.OnGoogleSignIn(activity))
+                    },
                     modifier = Modifier
                         .weight(1f),
                     radius = 6,
                     textStyle = bodyMedium3TextStyle.copy(
                         color = grayScale
-                    )
+                    ),
                 )
 
                 Spacer(modifier = Modifier.width(13.dp))
 
                 AppActionButton(
-                    icon = DesignSystemR.drawable.ic_google,
-                    text = CommonR.string.log_in_with_google,
+                    icon = DesignSystemR.drawable.ic_apple,
+                    text = CommonR.string.log_in_with_apple,
                     bgColor = grayScale.copy(alpha = .05f),
                     onClick = {},
                     modifier = Modifier.weight(1f),
@@ -241,11 +313,13 @@ fun ContentBox(
                 text = CommonR.string.sign_in,
                 bgColor = primaryBlue,
                 onClick = {
-
+                    onSignIn()
                 },
                 textStyle = bodyMedium1TextStyle.copy(color = Color.White),
                 radius = 6,
-                modifier = Modifier.height(40.dp)
+                modifier = Modifier
+                    .height(40.dp)
+                    .fillMaxWidth()
             )
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -282,6 +356,13 @@ fun PreviewLoginScreen() {
         ),
         onEvent = {},
         onForgotPassword = {},
-        onSignUp = {}
+        onSignUp = {},
+        onSignIn = {},
+        launchSignInIntentFlow = flow { },
+        uiEvent = flow {  },
+        onHome = {},
+        snackBarHostState = remember {
+            SnackbarHostState()
+        }
     )
 }

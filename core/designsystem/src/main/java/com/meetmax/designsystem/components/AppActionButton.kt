@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -47,16 +48,16 @@ fun AppActionButton(
 
     Button(
         onClick = {
-            onClick
+            onClick()
         },
         shape = RoundedCornerShape(radius),
         colors = ButtonDefaults.buttonColors(
             containerColor = bgColor
         ),
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier//.fillMaxWidth()
     ) {
         Row(
-            modifier = Modifier,
+            modifier = modifier.wrapContentWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {

@@ -11,4 +11,6 @@ object Modules {
     const val AUTH_PRESENTATION = ":features:auth:auth_presentation"
     const val AUTH_DATA = ":features:auth:auth_data"
     const val AUTH_DOMAIN = ":features:auth:auth_domain"
+
+    const val FEED_PRESENTATION = ":features:feed:feed_presentation"
 }

@@ -19,6 +19,8 @@ import com.meetmax.auth_presentaion.login.LoginViewModel
 import com.meetmax.auth_presentaion.registration.SignUpScreen
 import com.meetmax.auth_presentaion.registration.SignUpViewModel
 import com.meetmax.common.navigation.Route
+import com.meetmax.meetmax.home.HomeScreen
+import com.meetmax.meetmax.home.HomeViewModel
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
 
@@ -43,6 +45,11 @@ fun AppNavigation(
                         navController.navigate(Route.LOGIN) {
                             popUpTo(navController.graph.id) {}
                         }
+                    },
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
                     }
                 )
             }
@@ -50,13 +57,24 @@ fun AppNavigation(
             composable(route = Route.LOGIN) {
                 val viewModel = hiltViewModel<LoginViewModel>()
                 LoginScreen(
+                    snackBarHostState = snackBarHostState,
                     onEvent = viewModel::onEvent,
                     state = viewModel.state,
+                    uiEvent = viewModel.uiEvent,
                     onForgotPassword = {
                         navController.navigate(Route.FORGOT_PASSWORD)
                     },
                     onSignUp = {
                         navController.navigate(Route.SIGN_UP)
+                    },
+                    onSignIn = {
+
+                    },
+                    launchSignInIntentFlow = viewModel.launchSignInIntent,
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
                     }
                 )
             }
@@ -79,7 +97,22 @@ fun AppNavigation(
                     onEvent = viewModel::onEvent,
                     onSignIn = {
                         navController.navigateUp()
+                    },
+                    snackBarHostState = snackBarHostState,
+                    uiEvent = viewModel.uiEvent,
+                    launchSignInIntentFlow = viewModel.launchSignInIntent,
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
                     }
+                )
+            }
+
+            composable(route = Route.HOME) {
+                val viewModel = hiltViewModel<HomeViewModel>()
+                HomeScreen(
+                    state = viewModel.state
                 )
             }
         }
