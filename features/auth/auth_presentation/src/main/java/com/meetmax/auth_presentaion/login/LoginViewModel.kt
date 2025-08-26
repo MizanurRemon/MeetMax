@@ -71,17 +71,6 @@ class LoginViewModel @Inject constructor(
                 state = state.copy(isRememberMeChecked = event.state)
             }
 
-          /*  is LoginEvent.OnGoogleSignIn -> {
-                viewModelScope.launch {
-                    event.activity?.let {
-                        signInWithGoogleUseCase(activity = it).onSuccess {
-                            Log.d("dataxx", "onEvent: $it")
-                        }.onFailure {
-                            Log.d("dataxx", "ERROR: $it")
-                        }
-                    }
-                }
-            }*/
 
             is LoginEvent.OnGoogleSignIn -> {
                 val activity = event.activity ?: return

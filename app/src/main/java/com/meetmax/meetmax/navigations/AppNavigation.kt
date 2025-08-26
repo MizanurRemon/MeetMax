@@ -97,6 +97,14 @@ fun AppNavigation(
                     onEvent = viewModel::onEvent,
                     onSignIn = {
                         navController.navigateUp()
+                    },
+                    snackBarHostState = snackBarHostState,
+                    uiEvent = viewModel.uiEvent,
+                    launchSignInIntentFlow = viewModel.launchSignInIntent,
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
                     }
                 )
             }
