@@ -44,4 +44,13 @@
     <string name="live_video">Live Video</string>
     <string name="photo_video">Photo/Video</string>
     <string name="fortunate_to_have_been_a_part_of_an_amazing_company">After 7 ½ years at Samsung Australia, I am fortunate to have been a part of an amazing company and have done some amazing things.</string>
+    <string name="birthdays">Birthdays</string>
+    <string name="see_all">See All</string>
+    <string name="birthday_today">Birthday today</string>
+    <string name="write_on_his_inbox">Write on his inbox</string>
+    <string name="upcoming_birthdays">Upcoming birthdays</string>
+    <plurals name="upcoming_birthday_list">
+        <item quantity="one">See %d other have upcoming birthdays</item>
+        <item quantity="many">See %d others have upcoming birthdays</item>
+    </plurals>
 </resources>

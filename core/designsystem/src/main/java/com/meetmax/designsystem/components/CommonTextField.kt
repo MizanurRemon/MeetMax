@@ -51,7 +51,7 @@ fun CommonTextField(
     isTouched: Boolean,
     isValid: Boolean,
     onTouched: () -> Unit,
-    leadingIcon: Painter?,
+    leadingIcon: Painter? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     textStyle: TextStyle = bodyMedium1TextStyle.copy(
         color = Color.Black,

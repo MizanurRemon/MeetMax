@@ -42,6 +42,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.meetmax.designsystem.components.AppActionButton
+import com.meetmax.designsystem.components.BirthdayCompose
 import com.meetmax.designsystem.components.CommonTextField
 import com.meetmax.designsystem.components.DrawableCircleImage
 import com.meetmax.designsystem.rippleClickable
@@ -56,7 +57,6 @@ import com.meetmax.designsystem.R as DesignSystemR
 @Composable
 fun FeedScreen() {
     var showSheet by remember { mutableStateOf(false) }
-    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier
@@ -71,7 +71,7 @@ fun FeedScreen() {
             }
         )
 
-        //CreatePostCompose()
+        BirthdayCompose()
     }
 
     if (showSheet) {
