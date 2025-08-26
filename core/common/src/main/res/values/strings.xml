@@ -53,4 +53,9 @@
         <item quantity="one">See %d other have upcoming birthdays</item>
         <item quantity="other">See %d others have upcoming birthdays</item>
     </plurals>
+    <string name="graduation_ceremony">Graduation Ceremony</string>
+    <string name="the_graduation_ceremony_is_lso_sometimes_called">The graduation ceremony is also sometimes called…</string>
+    <string name="seen">seen</string>
+    <string name="photography_ideas">Photography Ideas</string>
+    <string name="reflections_work_because_they_can_create">Reflections. Reflections work because they can create…</string>
 </resources>
