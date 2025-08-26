@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.meetmax.auth_domain.use_case.GetGoogleSignInIntentUseCase
 import com.meetmax.auth_domain.use_case.HandleGoogleSignInResultUseCase
 import com.meetmax.auth_domain.use_case.SignInWithGoogleUseCase
+import com.meetmax.common.util.UiEvent
 import com.meetmax.common.util.WEB_CLIENT_ID
 import com.meetmax.common.util.validateEmail
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +35,9 @@ class LoginViewModel @Inject constructor(
 
     var state by mutableStateOf(LoginState())
         private set
+
+    private val _uiEvent = MutableSharedFlow<UiEvent>()
+    val uiEvent = _uiEvent.asSharedFlow()
 
     init {
 
@@ -85,7 +89,7 @@ class LoginViewModel @Inject constructor(
                    // state = state.copy(loading = true, error = null)
                     val result = signInWithGoogleUseCase(activity)
                     result.onSuccess { user ->
-                       // state = state.copy(user = user, loading = false, error = null)
+                        _uiEvent.emit(UiEvent.Success)
                         Log.d("dataxx", "Signed in via Credential Manager: $user")
                     }.onFailure { err ->
                         if (err is NoCredentialException) {
@@ -118,7 +122,7 @@ class LoginViewModel @Inject constructor(
                 viewModelScope.launch {
                     val result = handleGoogleSignInResultUseCase(event.data)
                     result.onSuccess { user ->
-                       // state = state.copy(user = user, loading = false, error = null)
+                        _uiEvent.emit(UiEvent.Success)
                         Log.d("dataxx", "Signed in via Legacy UI: $user")
                     }.onFailure { e ->
                       //  state = state.copy(loading = false, error = e.message)

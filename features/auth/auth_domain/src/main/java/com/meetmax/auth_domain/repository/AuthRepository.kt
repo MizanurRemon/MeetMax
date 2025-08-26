@@ -8,8 +8,5 @@ interface AuthRepository {
     suspend fun signInWithGoogle(activity: Activity): Result<AuthUserInfo>
     suspend fun handleGoogleSignInResult(data: Intent?): Result<AuthUserInfo>
     fun getGoogleSignInIntent(activity: Activity): Intent
-
-    /*    suspend fun signOut()
-
-        fun user(): Flow<AuthUserInfo?>*/
+    suspend fun getUser(): Result<List<User>>
 }

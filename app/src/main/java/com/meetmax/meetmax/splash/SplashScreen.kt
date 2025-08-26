@@ -29,7 +29,8 @@ import com.meetmax.designsystem.R as DesignSystemR
 @Composable
 fun SplashScreen(
     uiEvent: Flow<UiEvent>,
-    onLogin: () -> Unit
+    onLogin: () -> Unit,
+    onHome: () -> Unit
 ) {
 
     LaunchedEffect(key1 = true) {
@@ -37,7 +38,7 @@ fun SplashScreen(
 
             when (event) {
                 is UiEvent.Success -> {
-
+                    onHome()
                 }
 
                 is UiEvent.ShowSnackbar -> {
@@ -82,6 +83,7 @@ fun SplashScreen(
 fun PreviewSplashScreen() {
     SplashScreen(
         uiEvent = flow { },
-        onLogin = {}
+        onLogin = {},
+        onHome = {}
     )
 }

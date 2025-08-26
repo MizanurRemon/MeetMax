@@ -13,58 +13,26 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.meetmax.auth_data.dataSource.local.AuthLocalDataSource
+import com.meetmax.auth_data.mapper.toUser
+import com.meetmax.auth_data.mapper.toUserList
 import com.meetmax.auth_domain.model.AuthUserInfo
 import com.meetmax.auth_domain.repository.AuthRepository
+import com.meetmax.auth_domain.repository.User
 import com.meetmax.common.util.WEB_CLIENT_ID
+import com.meetmax.database.model.UserEntity
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class AuthRepositoryImpl @Inject constructor(
-    @ApplicationContext private val appContext: Context
+    @ApplicationContext private val appContext: Context,
+    private val authLocalDataSource: AuthLocalDataSource,
 ) : AuthRepository {
-    /*override suspend fun signInWithGoogle(activity: Activity?): Result<AuthUserInfo> {
-
-        if (activity == null) return Result.failure(IllegalArgumentException("Activity cannot be null"))
-
-        return try {
-
-            val googleIdOption = GetGoogleIdOption.Builder()
-                .setServerClientId(WEB_CLIENT_ID)
-                .setFilterByAuthorizedAccounts(false)
-                .build()
-
-            val request = GetCredentialRequest.Builder()
-                .addCredentialOption(googleIdOption)
-                .build()
-
-            val credentialManager = CredentialManager.create(activity)
-
-            val result = credentialManager.getCredential(
-                context = appContext,
-                request = request
-            )
-
-            val googleCred = GoogleIdTokenCredential.createFrom(result.credential.data)
-
-            return Result.success(
-                AuthUserInfo(
-                    id = googleCred.id,
-                    displayName = googleCred.displayName,
-                    email = googleCred.id,
-                    photoUrl = googleCred.profilePictureUri?.toString(),
-                    token = googleCred.idToken
-                )
-            )
-        } catch (e: NoCredentialException) {
-            // No credential exists: prompt user with the full Google Sign-In flow
-           // Result.failure(e)
-            launchGoogleSignInUI(activity)
-        } catch (e: Exception) {
-            Result.failure(e)
-        }
-    }*/
 
     override suspend fun signInWithGoogle(activity: Activity): Result<AuthUserInfo> {
         return try {
@@ -92,6 +60,18 @@ class AuthRepositoryImpl @Inject constructor(
                 photoUrl = tokenCred.profilePictureUri?.toString(),
                 token = tokenCred.idToken
             )
+
+            Log.d("dataxx", "signInWithGoogle: $user")
+            authLocalDataSource.deleteUsers()
+            authLocalDataSource.saveUser(
+                UserEntity(
+                    userID = user.id,
+                    name = user.displayName,
+                    email = user.email,
+                    photoUrl = user.photoUrl,
+                    token = user.token
+                )
+            )
             Result.success(user)
         } catch (e: NoCredentialException) {
             Result.failure(e)
@@ -113,6 +93,16 @@ class AuthRepositoryImpl @Inject constructor(
                 photoUrl = account.photoUrl?.toString(),
                 token = account.idToken
             )
+            authLocalDataSource.deleteUsers()
+            authLocalDataSource.saveUser(
+                UserEntity(
+                    userID = user.id,
+                    name = user.displayName,
+                    email = user.email,
+                    photoUrl = user.photoUrl,
+                    token = user.token
+                )
+            )
             Log.d("dataxx", "handleGoogleSignInResult: $user")
             Result.success(user)
         } catch (e: ApiException) {
@@ -133,36 +123,16 @@ class AuthRepositoryImpl @Inject constructor(
         return client.signInIntent
     }
 
-/*    private suspend fun launchGoogleSignInUI(activity: Activity): Result<AuthUserInfo> {
+    override suspend fun getUser(): Result<List<User>> {
         return try {
-            val gso = GoogleSignInOptions.Builder(
-                GoogleSignInOptions.DEFAULT_SIGN_IN
-            )
-                .requestIdToken(WEB_CLIENT_ID)
-                .requestEmail()
-                .build()
-
-            val client = GoogleSignIn.getClient(activity, gso)
-
-            val deferred = kotlinx.coroutines.CompletableDeferred<Result<AuthUserInfo>>()
-
-            val signInIntent = client.signInIntent
-            activity.startActivityForResult(signInIntent, 1001)
-
-            // You need to handle onActivityResult in your Activity and complete the deferred:
-            // deferred.complete(Result.success(userInfo)) or deferred.complete(Result.failure(exception))
-
-            deferred.await()
+            val userList = authLocalDataSource.getUsers().first()
+            if (userList.isNotEmpty()) {
+                Result.success(userList.toUserList())
+            } else {
+                Result.failure(Exception("No user found"))
+            }
         } catch (e: Exception) {
             Result.failure(e)
         }
     }
-
-     override suspend fun signOut() {
-
-     }
-
-     override fun user(): Flow<AuthUserInfo?> {
-
-     }*/
 }

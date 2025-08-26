@@ -18,4 +18,5 @@ android {
 dependencies {
     implementation(project(Modules.COMMON))
     implementation(project(Modules.AUTH_DOMAIN))
+    implementation(project(Modules.DATABASE))
 }

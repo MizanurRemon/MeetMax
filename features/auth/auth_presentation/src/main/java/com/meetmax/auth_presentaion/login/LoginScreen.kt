@@ -3,7 +3,6 @@ package com.meetmax.auth_presentaion.login
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -21,9 +20,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -39,9 +41,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.meetmax.common.util.WEB_CLIENT_ID
+import com.meetmax.common.util.UiEvent
 import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.AuthTopBar
 import com.meetmax.designsystem.components.CommonTextField
@@ -64,19 +64,22 @@ import com.meetmax.designsystem.R as DesignSystemR
 @SuppressLint("ContextCastToActivity")
 @Composable
 fun LoginScreen(
+    snackBarHostState: SnackbarHostState,
     state: LoginState,
     onEvent: (LoginEvent) -> Unit,
+    uiEvent: Flow<UiEvent>,
     onForgotPassword: () -> Unit,
     onSignUp: () -> Unit,
     onSignIn: () -> Unit,
-    launchSignInIntentFlow: Flow<Intent>
+    launchSignInIntentFlow: Flow<Intent>,
+    onHome: ()-> Unit
 ) {
     val activity = LocalContext.current as? Activity
+    val context = LocalContext.current
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        Log.d("dataxx", "ActivityResult: $result")
         if (result.resultCode == Activity.RESULT_OK) {
             onEvent(LoginEvent.OnHandleGoogleSignInResult(result.data))
         } else {
@@ -84,10 +87,31 @@ fun LoginScreen(
         }
     }
 
-    // Collect one-shot intents from ViewModel and launch
     LaunchedEffect(Unit) {
         launchSignInIntentFlow.collectLatest { intent ->
             launcher.launch(intent)
+        }
+    }
+
+    LaunchedEffect(key1 = true) {
+        uiEvent.collect { event ->
+            when (event) {
+                is UiEvent.Success -> {
+                    onHome()
+                }
+
+                is UiEvent.ShowSnackbar -> {
+                    snackBarHostState.showSnackbar(
+                        message = event.message.asString(context = context),
+                        duration = SnackbarDuration.Short,
+                    )
+                }
+
+                is UiEvent.NavigateUp -> {
+
+                }
+            }
+
         }
     }
 
@@ -202,8 +226,8 @@ fun ContentBox(
                 Spacer(modifier = Modifier.width(13.dp))
 
                 AppActionButton(
-                    icon = DesignSystemR.drawable.ic_google,
-                    text = CommonR.string.log_in_with_google,
+                    icon = DesignSystemR.drawable.ic_apple,
+                    text = CommonR.string.log_in_with_apple,
                     bgColor = grayScale.copy(alpha = .05f),
                     onClick = {},
                     modifier = Modifier.weight(1f),
@@ -334,6 +358,11 @@ fun PreviewLoginScreen() {
         onForgotPassword = {},
         onSignUp = {},
         onSignIn = {},
-        launchSignInIntentFlow = flow { }
+        launchSignInIntentFlow = flow { },
+        uiEvent = flow {  },
+        onHome = {},
+        snackBarHostState = remember {
+            SnackbarHostState()
+        }
     )
 }

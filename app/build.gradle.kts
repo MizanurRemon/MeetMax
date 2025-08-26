@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     //id("com.google.gms.google-services")
     id("kotlin-kapt")
+    //id("com.google.devtools.ksp")
     id ("dagger.hilt.android.plugin")
     alias(libs.plugins.googleServices)
 }
@@ -65,6 +66,7 @@ dependencies {
     
     implementation(project(Modules.DESIGN_SYSTEM))
     implementation(project(Modules.COMMON))
+    implementation(project(Modules.DATABASE))
 
     implementation(project(Modules.AUTH_PRESENTATION))
     implementation(project(Modules.AUTH_DOMAIN))
@@ -73,7 +75,6 @@ dependencies {
     implementation(project(Modules.FEED_PRESENTATION))
     /*
     implementation(project(Modules.NETWORK))
-    implementation(project(Modules.DATABASE))
     implementation(project(Modules.DATASTORE))
 
     implementation(project(Modules.DOMAIN))

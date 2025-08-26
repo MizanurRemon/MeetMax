@@ -2,6 +2,7 @@ package com.meetmax.auth_domain.di
 
 import com.meetmax.auth_domain.repository.AuthRepository
 import com.meetmax.auth_domain.use_case.GetGoogleSignInIntentUseCase
+import com.meetmax.auth_domain.use_case.GetUserUseCase
 import com.meetmax.auth_domain.use_case.HandleGoogleSignInResultUseCase
 import com.meetmax.auth_domain.use_case.SignInWithGoogleUseCase
 import dagger.Module
@@ -31,5 +32,11 @@ class AuthDomainModule {
     @ViewModelScoped
     fun provideGetGoogleSignInIntentUseCase(authRepository: AuthRepository): GetGoogleSignInIntentUseCase {
         return GetGoogleSignInIntentUseCase(authRepository)
+    }
+
+    @Provides
+    @ViewModelScoped
+    fun provideGetUserUseCase(authRepository: AuthRepository): GetUserUseCase{
+        return GetUserUseCase(authRepository)
     }
 }

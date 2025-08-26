@@ -44,6 +44,11 @@ fun AppNavigation(
                         navController.navigate(Route.LOGIN) {
                             popUpTo(navController.graph.id) {}
                         }
+                    },
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
                     }
                 )
             }
@@ -51,8 +56,10 @@ fun AppNavigation(
             composable(route = Route.LOGIN) {
                 val viewModel = hiltViewModel<LoginViewModel>()
                 LoginScreen(
+                    snackBarHostState = snackBarHostState,
                     onEvent = viewModel::onEvent,
                     state = viewModel.state,
+                    uiEvent = viewModel.uiEvent,
                     onForgotPassword = {
                         navController.navigate(Route.FORGOT_PASSWORD)
                     },
@@ -60,9 +67,14 @@ fun AppNavigation(
                         navController.navigate(Route.SIGN_UP)
                     },
                     onSignIn = {
-                        navController.navigate(Route.HOME)
+
                     },
-                    launchSignInIntentFlow = viewModel.launchSignInIntent
+                    launchSignInIntentFlow = viewModel.launchSignInIntent,
+                    onHome = {
+                        navController.navigate(Route.HOME) {
+                            popUpTo(navController.graph.id) {}
+                        }
+                    }
                 )
             }
 

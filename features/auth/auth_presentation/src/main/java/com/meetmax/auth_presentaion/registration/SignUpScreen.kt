@@ -160,8 +160,8 @@ private fun ContentBox(
                 Spacer(modifier = Modifier.width(13.dp))
 
                 AppActionButton(
-                    icon = DesignSystemR.drawable.ic_google,
-                    text = CommonR.string.log_in_with_google,
+                    icon = DesignSystemR.drawable.ic_apple,
+                    text = CommonR.string.log_in_with_apple,
                     bgColor = grayScale.copy(alpha = .05f),
                     onClick = {},
                     modifier = Modifier.weight(1f),
