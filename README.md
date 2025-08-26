@@ -17,6 +17,10 @@
 DOWNLOAD DEBUG APK FROM HERE: 
 - https://drive.google.com/file/d/1enz5gvHVhKygjDyZsXo_Qkm6CIvwe0tP/view?usp=sharing
 
+## VIDEO
+WATCH VIDEO:
+- https://drive.google.com/file/d/1enz5gvHVhKygjDyZsXo_Qkm6CIvwe0tP/view?usp=sharing
+
 ## ⚡ Setup
 1. Clone the repository
    ```bash
