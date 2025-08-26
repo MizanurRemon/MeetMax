@@ -27,5 +27,5 @@ DOWNLOAD DEBUG APK FROM HERE:
 To find follow this- 
 app -> core -> common -> src -> main -> java -> util -> Constants.kt
 4. Now go to terminal, run './gradlew signingReport', now app is ready for google authentication
-4. Now build the app.
+5. Now build the app.
 
