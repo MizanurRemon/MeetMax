@@ -1,6 +1,5 @@
 package com.meetmax.auth_data.di
 
-import android.app.Activity
 import android.content.Context
 import com.meetmax.auth_data.dataSource.local.AuthLocalDataSource
 import com.meetmax.auth_data.dataSourceImpl.AuthLocalDataSourceImpl
