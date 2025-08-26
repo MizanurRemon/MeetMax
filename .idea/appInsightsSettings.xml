@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.meetmax.meetmax" />
+                  <option name="mobileSdkAppId" value="1:849697408832:android:2abd9b288212fd28ff5ca5" />
+                  <option name="projectId" value="meetmax-25" />
+                  <option name="projectNumber" value="849697408832" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "849697408832",
+    "project_id": "meetmax-25",
+    "storage_bucket": "meetmax-25.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849697408832:android:2abd9b288212fd28ff5ca5",
+        "android_client_info": {
+          "package_name": "com.meetmax.meetmax"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "849697408832-nharfhi2tu1auelsdpuarqdv8p32d0u3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meetmax.meetmax",
+            "certificate_hash": "4586bdfa04d78a933d460f5a1a3cf67c3fc6e562"
+          }
+        },
+        {
+          "client_id": "849697408832-gu1oqst2frkjg8qa47g30msdfrlsd39j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAl1WkElguNgezglc2sGCe1Y4eauFGej24"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "849697408832-3e3au4iifhvu33od9qjpuiivq7pc93bl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
