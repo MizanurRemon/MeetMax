@@ -18,14 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -74,24 +73,7 @@ fun BirthdayCompose() {
                 )
             }
 
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-
-            )
-
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(color = grayScale.copy(alpha = .2f))
-            )
-
-            Spacer(
-                modifier = Modifier
-                    .height(10.dp)
-
-            )
+            SpaceBar()
 
             Column(modifier = Modifier.fillMaxWidth()) {
 
@@ -190,31 +172,11 @@ fun BirthdayCompose() {
                                 .padding(14.dp)
 
                         ) {
-                            Box(
-                                modifier = Modifier
-                                    .background(
-                                        color = primaryYellow,
-                                        shape = RoundedCornerShape(8.dp)
-                                    )
-
-                            ) {
-                                Box(
-                                    modifier = Modifier
-                                        .background(
-                                            color = Color.White.copy(alpha = .8f),
-                                            shape = RoundedCornerShape(8.dp)
-                                        )
-                                        .padding(12.dp)
-                                ) {
-                                    Image(
-                                        painter = painterResource(DesignSystemR.drawable.ic_birthday),
-                                        contentDescription = null,
-                                        modifier = Modifier
-                                            .size(22.dp)
-                                            .align(Alignment.Center)
-                                    )
-                                }
-                            }
+                            BackgroundImageWithIconCompose(
+                                icon = DesignSystemR.drawable.ic_birthday,
+                                primaryColor = primaryYellow,
+                                secondaryColor = Color.White.copy(alpha = .8f)
+                            )
 
                             Spacer(
                                 modifier = Modifier.width(14.dp)
@@ -239,7 +201,8 @@ fun BirthdayCompose() {
                                     style = bodyMedium1TextStyle.copy(
                                         color = grayScale.copy(
                                             alpha = .6f
-                                        )
+                                        ),
+                                        textAlign = TextAlign.Start
                                     )
                                 )
                             }
@@ -253,6 +216,8 @@ fun BirthdayCompose() {
 
     }
 }
+
+
 
 @Composable
 @Preview
