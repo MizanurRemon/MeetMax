@@ -59,4 +59,9 @@
     <string name="photography_ideas">Photography Ideas</string>
     <string name="reflections_work_because_they_can_create">Reflections. Reflections work because they can create…</string>
     <string name="recent_event">Recent Event</string>
+    <string name="comments">Comments</string>
+    <string name="share">Share</string>
+    <string name="reply">Reply</string>
+    <string name="like">Like</string>
+    <string name="write_a_comment">Write a comment…</string>
 </resources>

@@ -44,6 +44,7 @@ import com.meetmax.designsystem.components.AppActionButton
 import com.meetmax.designsystem.components.BirthdayCompose
 import com.meetmax.designsystem.components.CommonTextField
 import com.meetmax.designsystem.components.DrawableCircleImage
+import com.meetmax.designsystem.components.PostCompose
 import com.meetmax.designsystem.components.RecentEventCompose
 import com.meetmax.designsystem.rippleClickable
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
@@ -51,6 +52,7 @@ import com.meetmax.designsystem.theme.bodyMedium1TextStyle
 import com.meetmax.designsystem.theme.bodyRegularM3TextStyle
 import com.meetmax.designsystem.theme.grayScale
 import com.meetmax.designsystem.theme.primaryBlue
+import com.meetmax.designsystem.data.POSTS
 import com.meetmax.common.R as CommonR
 import com.meetmax.designsystem.R as DesignSystemR
 
@@ -72,7 +74,13 @@ fun FeedScreen() {
             }
         )
 
-        RecentEventCompose()
+        POSTS.forEachIndexed { index, post ->
+            PostCompose(response = post)
+
+            if (index == 0) {
+                RecentEventCompose()
+            }
+        }
 
         BirthdayCompose()
 

@@ -40,6 +40,7 @@ import com.meetmax.designsystem.theme.primaryGreen
 import com.meetmax.designsystem.theme.primaryRed
 import com.meetmax.designsystem.utils.CEREMONY_USER_LIST
 import com.meetmax.designsystem.utils.PHOTOGRAPHY_USER_LIST
+import kotlin.compareTo
 import com.meetmax.common.R as CommonR
 import com.meetmax.designsystem.R as DesignSystemR
 
@@ -173,7 +174,9 @@ private fun EventItemCompose(
                     Spacer(modifier = Modifier.weight(1f))
 
                     OverlappingAvatars(
-                        imageUrls = seenList
+                        imageUrls = seenList,
+                        overlap = -4,
+                        size = 18
                     )
 
                 }
@@ -183,56 +186,7 @@ private fun EventItemCompose(
     }
 }
 
-@Composable
-private fun OverlappingAvatars(
-    imageUrls: List<Int>
-) {
-    val overlap = -4
-    val size = 18
-    val rightOffset =
-        if (imageUrls.size > 3) (overlap * (-3)) else (overlap * (imageUrls.size)) + (size + overlap)
 
-    Row(
-        modifier = Modifier.offset(x = rightOffset.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        imageUrls.take(3).forEachIndexed { index, imageUrl ->
-            Box(
-                modifier = Modifier
-                    .offset(x = (overlap * index).dp)
-            ) {
-                DrawableCircleImage(
-                    imageUrl = imageUrl,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(size.dp)
-                        .clip(CircleShape)
-                        .border(1.dp, Color.White, CircleShape)
-                        .zIndex((imageUrls.size - index).toFloat())
-                )
-            }
-        }
-
-        if (imageUrls.size > 3) {
-            Box(
-                modifier = Modifier
-                    .offset(x = overlap.dp * imageUrls.take(3).size)
-                    .size(size.dp)
-                    .clip(CircleShape)
-                    .background(Color.Gray),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "+${imageUrls.size - 3}",
-                    style = bodyRegularM3TextStyle.copy(
-                        color = Color.White,
-                        fontSize = 10.sp
-                    )
-                )
-            }
-        }
-    }
-}
 
 
 @Preview
