@@ -40,7 +40,8 @@ import com.meetmax.designsystem.R as DesignSystemR
 
 @Composable
 fun TopAppBar(
-    search: MutableState<String>
+    search: MutableState<String>,
+    photo : String
 ) {
     Box(
         modifier = Modifier
@@ -158,6 +159,7 @@ fun TopAppBar(
 @Preview(showBackground = true)
 fun PreviewTopAppBar() {
     TopAppBar(
-        search = remember { mutableStateOf("") }
+        search = remember { mutableStateOf("") },
+        photo = ""
     )
 }

@@ -25,14 +25,17 @@ import com.meetmax.designsystem.BOTTOM_NAVIGATION_ITEM
 import com.meetmax.designsystem.components.CustomNavigationItem
 import com.meetmax.designsystem.components.TopAppBar
 import com.meetmax.designsystem.theme.BACKGROUND_COLOR
+import com.meetmax.meetmax.home.bottom_nav_screens.HomeState
 import com.meetmax.meetmax.navigations.BottomNavigationGraph
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    state: HomeState
+) {
     val bottomNavController = rememberNavController()
     Scaffold(
         topBar = {
-            TopAppBar(remember { mutableStateOf("") })
+            TopAppBar(search = remember { mutableStateOf("") }, photo = state.photo)
         },
         bottomBar = {
             NavigationBar(
@@ -87,6 +90,8 @@ fun HomeScreen() {
 @Composable
 @Preview
 fun PreviewHomeScreen() {
+
     HomeScreen(
+        state = HomeState()
     )
 }

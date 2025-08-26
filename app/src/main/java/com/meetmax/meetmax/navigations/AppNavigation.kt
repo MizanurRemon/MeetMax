@@ -20,6 +20,7 @@ import com.meetmax.auth_presentaion.registration.SignUpScreen
 import com.meetmax.auth_presentaion.registration.SignUpViewModel
 import com.meetmax.common.navigation.Route
 import com.meetmax.meetmax.home.HomeScreen
+import com.meetmax.meetmax.home.HomeViewModel
 import com.meetmax.meetmax.splash.SplashScreen
 import com.meetmax.meetmax.splash.SplashViewModel
 
@@ -101,7 +102,9 @@ fun AppNavigation(
             }
 
             composable(route = Route.HOME) {
+                val viewModel = hiltViewModel<HomeViewModel>()
                 HomeScreen(
+                    state = viewModel.state
                 )
             }
         }

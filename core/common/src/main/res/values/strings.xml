@@ -38,4 +38,10 @@
     <string name="photo">Photo</string>
     <string name="feeling">Feeling</string>
     <string name="post">Post</string>
+    <string name="create_a_post">Create a post</string>
+    <string name="visible_for">Visible for</string>
+    <string name="friends">Friends</string>
+    <string name="live_video">Live Video</string>
+    <string name="photo_video">Photo/Video</string>
+    <string name="fortunate_to_have_been_a_part_of_an_amazing_company">After 7 ½ years at Samsung Australia, I am fortunate to have been a part of an amazing company and have done some amazing things.</string>
 </resources>

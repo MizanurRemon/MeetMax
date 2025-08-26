@@ -1,0 +1,292 @@
+package com.meetmax.feed_presentation
+
+import androidx.activity.compose.BackHandler
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.meetmax.designsystem.components.AppActionButton
+import com.meetmax.designsystem.components.DrawableCircleImage
+import com.meetmax.designsystem.rippleClickable
+import com.meetmax.designsystem.theme.bodyMedium1TextStyle
+import com.meetmax.designsystem.theme.bodyMedium3TextStyle
+import com.meetmax.designsystem.theme.bodyRegular4TextStyle
+import com.meetmax.designsystem.theme.bodyRegularM4TextStyle
+import com.meetmax.designsystem.theme.bodyRegularTextStyle
+import com.meetmax.designsystem.theme.grayScale
+import com.meetmax.designsystem.theme.primaryBlue
+import com.meetmax.common.R as CommonR
+import com.meetmax.designsystem.R as DesignSystemR
+
+@Composable
+fun CreatePostCompose(
+    onBack:()-> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(color = Color.White)
+            .padding(horizontal = 20.dp)
+    ) {
+        Column(modifier = Modifier.fillMaxWidth()) {
+            TopNavBox(
+                onBack = {
+                    onBack()
+                }
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(1.dp)
+                    .background(color = grayScale)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(14.dp))
+
+        PostBox()
+    }
+
+    BackHandler {
+        onBack()
+    }
+}
+
+@Composable
+fun PostBox() {
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Row(verticalAlignment = Alignment.Top) {
+            DrawableCircleImage(
+                imageUrl = DesignSystemR.drawable.ic_person_avatar,
+                size = 32,
+                shape = CircleShape
+            )
+
+            Spacer(modifier = Modifier.width(14.dp))
+
+            Column(
+                modifier = Modifier
+                    .background(
+                        color = grayScale.copy(alpha = .05f),
+                        shape = RoundedCornerShape(6.dp)
+                    )
+                    .padding(10.dp)
+            ) {
+                Text(
+                    text = stringResource(CommonR.string.fortunate_to_have_been_a_part_of_an_amazing_company),
+                    style = bodyRegularTextStyle.copy(
+                        color = grayScale,
+                        fontWeight = FontWeight.W500,
+                        textAlign = TextAlign.Start
+                    ),
+                )
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(168.dp)
+                ) {
+
+                    DrawableCircleImage(
+                        imageUrl = DesignSystemR.drawable.ic_create_a_post,
+                        modifier = Modifier.fillMaxSize(),
+                        shape = RoundedCornerShape(6.dp),
+                        contentScale = ContentScale.Crop
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .padding(10.dp)
+                            .align(Alignment.TopEnd)
+                    ) {
+                        Image(
+                            painter = painterResource(DesignSystemR.drawable.ic_close),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .border(width = 2.dp, color = grayScale, shape = CircleShape)
+                                .size(16.dp)
+                                .padding(3.dp)
+                        )
+                    }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        FeatureItem(
+            icon = DesignSystemR.drawable.ic_video_camera,
+            text = CommonR.string.live_video,
+            onClick = {
+
+            }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        FeatureItem(
+            icon = DesignSystemR.drawable.ic_picture,
+            text = CommonR.string.photo_video,
+            onClick = {
+
+            }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        FeatureItem(
+            icon = DesignSystemR.drawable.ic_smile,
+            text = CommonR.string.feeling,
+            onClick = {
+
+            }
+        )
+
+        Spacer(modifier = Modifier.height(20.dp))
+
+        AppActionButton(
+            text = CommonR.string.post,
+            bgColor = primaryBlue,
+            onClick = {
+
+            },
+            modifier = Modifier.fillMaxWidth(),
+            textStyle = bodyMedium1TextStyle.copy(
+                color = Color.White
+            )
+        )
+    }
+}
+
+@Composable
+fun FeatureItem(onClick: () -> Unit, @StringRes text: Int, @DrawableRes icon: Int) {
+    Row(
+        modifier = Modifier.rippleClickable {
+            onClick
+        },
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(icon),
+            contentDescription = null,
+            modifier = Modifier.size(16.dp)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Text(
+            text = stringResource(text),
+            style = bodyMedium3TextStyle.copy(
+                color = grayScale
+            )
+        )
+
+    }
+}
+
+@Composable
+fun TopNavBox(onBack: ()-> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 10.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(DesignSystemR.drawable.ic_back),
+            contentDescription = null,
+            modifier = Modifier.size(16.dp).rippleClickable(
+                onClick = {
+                    onBack()
+                }
+            )
+        )
+
+        Text(
+            text = stringResource(CommonR.string.create_a_post),
+            style = bodyMedium1TextStyle.copy(color = grayScale),
+            modifier = Modifier.padding(start = 10.dp)
+        )
+
+        Spacer(modifier = Modifier.weight(1f))
+
+        Text(
+            text = stringResource(CommonR.string.visible_for),
+            style = bodyRegular4TextStyle.copy(
+                color = grayScale,
+                fontWeight = FontWeight.W500
+            ),
+            modifier = Modifier.padding(start = 10.dp)
+        )
+
+        Spacer(
+            modifier = Modifier.width(10.dp)
+        )
+
+        Box(
+            modifier = Modifier.background(
+                shape = RoundedCornerShape(3.dp),
+                color = grayScale.copy(.05f)
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .padding(vertical = 4.dp, horizontal = 10.dp)
+                    .align(alignment = Alignment.Center),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = stringResource(CommonR.string.friends),
+                    style = bodyRegularM4TextStyle.copy(
+                        color = primaryBlue,
+                        fontWeight = FontWeight.W500
+                    ),
+                    modifier = Modifier.padding(start = 10.dp)
+                )
+                Spacer(
+                    modifier = Modifier.width(8.dp)
+                )
+                Image(
+                    painter = painterResource(DesignSystemR.drawable.ic_angle_down),
+                    contentDescription = null,
+                    modifier = Modifier.size(10.dp)
+                )
+            }
+        }
+    }
+}
+
+@Composable
+@Preview
+fun PreviewCreatePost() {
+    CreatePostCompose(
+        onBack = {}
+    )
+}
