@@ -64,7 +64,7 @@ fun CreatePostCompose(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(1.dp)
-                    .background(color = grayScale)
+                    .background(color = grayScale.copy(alpha = .2f))
             )
         }
 

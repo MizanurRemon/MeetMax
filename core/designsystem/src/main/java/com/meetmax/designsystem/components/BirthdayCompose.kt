@@ -17,9 +17,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,11 +35,13 @@ import com.meetmax.designsystem.theme.bodyMedium3TextStyle
 import com.meetmax.designsystem.theme.bodyRegularM3TextStyle
 import com.meetmax.designsystem.theme.grayScale
 import com.meetmax.designsystem.theme.primaryBlue
+import com.meetmax.designsystem.theme.primaryYellow
 import com.meetmax.common.R as CommonR
 import com.meetmax.designsystem.R as DesignSystemR
 
 @Composable
 fun BirthdayCompose() {
+    val count = 2
 
     Box(
         modifier = Modifier
@@ -76,8 +82,9 @@ fun BirthdayCompose() {
 
             Spacer(
                 modifier = Modifier
+                    .fillMaxWidth()
                     .height(1.dp)
-                    .background(color = grayScale)
+                    .background(color = grayScale.copy(alpha = .2f))
             )
 
             Spacer(
@@ -165,6 +172,81 @@ fun BirthdayCompose() {
                 }
 
                 Spacer(modifier = Modifier.height(14.dp))
+
+                Box(
+                    modifier = Modifier
+                        .background(color = Color.White)
+                        .clip(RoundedCornerShape(8.dp))
+                ) {
+
+                    Box(
+                        modifier = Modifier.background(
+                            color = grayScale.copy(alpha = 0.03f),
+                        )
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(14.dp)
+
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .background(
+                                        color = primaryYellow,
+                                        shape = RoundedCornerShape(8.dp)
+                                    )
+
+                            ) {
+                                Box(
+                                    modifier = Modifier
+                                        .background(
+                                            color = Color.White.copy(alpha = .8f),
+                                            shape = RoundedCornerShape(8.dp)
+                                        )
+                                        .padding(12.dp)
+                                ) {
+                                    Image(
+                                        painter = painterResource(DesignSystemR.drawable.ic_birthday),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .size(22.dp)
+                                            .align(Alignment.Center)
+                                    )
+                                }
+                            }
+
+                            Spacer(
+                                modifier = Modifier.width(14.dp)
+                            )
+
+                            Column {
+                                Text(
+                                    text = stringResource(CommonR.string.upcoming_birthdays),
+                                    style = bodyMedium1TextStyle.copy(color = grayScale)
+                                )
+
+                                Spacer(
+                                    modifier = Modifier.height(6.dp)
+                                )
+
+                                Text(
+                                    text = pluralStringResource(
+                                        id = CommonR.plurals.upcoming_birthday_list,
+                                        count = count,
+                                        formatArgs = arrayOf(count)
+                                    ),
+                                    style = bodyMedium1TextStyle.copy(
+                                        color = grayScale.copy(
+                                            alpha = .6f
+                                        )
+                                    )
+                                )
+                            }
+                        }
+                    }
+
+                }
 
             }
         }

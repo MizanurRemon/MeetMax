@@ -51,6 +51,6 @@
     <string name="upcoming_birthdays">Upcoming birthdays</string>
     <plurals name="upcoming_birthday_list">
         <item quantity="one">See %d other have upcoming birthdays</item>
-        <item quantity="many">See %d others have upcoming birthdays</item>
+        <item quantity="other">See %d others have upcoming birthdays</item>
     </plurals>
 </resources>
